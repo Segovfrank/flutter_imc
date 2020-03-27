@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'IMCModelo.dart';
 import 'PantallaResultado.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ class PantallaIMCStateful extends StatefulWidget {
   @override
   _PantallaIMCState createState() => _PantallaIMCState();
 }
+
+
 
 class _PantallaIMCState extends State<PantallaIMCStateful> {
   double _alturaUsuario = 100.0;
@@ -85,6 +88,31 @@ class _PantallaIMCState extends State<PantallaIMCStateful> {
               SizedBox(height: 16,),
               Container(
                 child: FlatButton.icon(onPressed: (){
+                  setState(() {
+                    _IMCModelo = new IMCModelo();
+                    _imc = (pow((_pesoUsuario/_alturaUsuario), 2))*100;
+                    _imc = double.parse(_imc.toStringAsFixed(2));
+                    print("Imc = $_imc");
+                    _IMCModelo.imc = _imc;
+                    if(_imc > 18.5 && _imc < 25.00){
+                      _IMCModelo.esNormal = true;
+                    }else{
+                      _IMCModelo.esNormal = false;
+                    }
+
+                    var res = "Normal";
+                    if(_imc <= 18.5){
+                      res = "Bajo de peso";
+                    }else if(_imc > 18.5 && _imc <= 24.9){
+                      res = "Peso ideal";
+                    }else if(_imc >= 25 && _imc <= 29.9){
+                      res = "Sobrepeso";
+                    }else{
+                      res = "Obesidad";
+                    }
+                    _IMCModelo.resultado = res;
+
+                  });
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) => ResultadoIMC(imcModelo: _IMCModelo,)
                   ));

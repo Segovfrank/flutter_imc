@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ResultadoIMC extends StatelessWidget {
   final imcModelo;
+
 
   ResultadoIMC({this.imcModelo});
 
@@ -21,14 +24,14 @@ class ResultadoIMC extends StatelessWidget {
               Container(
                 height: 200,
                 width: 200,
-                child: imcModelo.esNormal ? SvgPicture.asset("INCLUYE_TU_IMAGEN_FELIZ", fit: BoxFit.contain,) : SvgPicture.asset("INCLUYE_TU_IMAGEN_TRISTE", fit: BoxFit.contain,) ,
+                child: imcModelo.esNormal ? SvgPicture.asset("assets/images/emoticon-happy-outline.svg", fit: BoxFit.contain,) : SvgPicture.asset("assets/images/emoticon-sad-outline.svg", fit: BoxFit.contain,) ,
               ),
 
               SizedBox(
                 height: 50,
               ),
-              Text("Tu IMC es IMC_RESULT", style: TextStyle(color: Colors.red[700], fontSize: 34, fontWeight: FontWeight.w700),),
-              Text("IMC_RESULT", style: TextStyle(color: Colors.grey[700], fontSize: 18, fontWeight: FontWeight.w500),),
+              Text("Tu IMC es ${imcModelo.imc}", style: TextStyle(color: Colors.red[700], fontSize: 34, fontWeight: FontWeight.w700),),
+              Text("${imcModelo.resultado}", style: TextStyle(color: Colors.grey[700], fontSize: 18, fontWeight: FontWeight.w500),),
 
               SizedBox(height: 16,),
 
